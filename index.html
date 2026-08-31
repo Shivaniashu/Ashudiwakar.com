@@ -25,7 +25,7 @@
         .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
         .product-card { background: #ffffff; border-radius: 14px; padding: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #e5e7eb; transition: transform 0.2s; }
         .product-card:hover { transform: translateY(-3px); }
-        .product-card img { width: 100%; height: 160px; object-fit: cover; border-radius: 10px; margin-bottom: 10px; }
+        .product-card img { width: 100%; height: 170px; object-fit: cover; border-radius: 10px; margin-bottom: 10px; }
         .product-card h3 { font-size: 16px; margin-bottom: 5px; color: #1f2937; }
         .product-card p { font-size: 12px; color: #6b7280; margin-bottom: 10px; }
         .price-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f3f4f6; padding-top: 10px; }
@@ -40,7 +40,11 @@
         .modal-header h3 { font-size: 18px; color: #111827; }
         .close-icon { font-size: 24px; font-weight: bold; border: none; background: none; cursor: pointer; color: #6b7280; }
 
-        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f3f4f6; font-size: 14px; }
+        /* Cart Item & Quantity controls */
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f3f4f6; font-size: 14px; }
+        .cart-item-info { flex: 1; }
+        .qty-controls { display: flex; align-items: center; gap: 8px; margin: 0 10px; }
+        .qty-btn { width: 26px; height: 26px; border-radius: 50%; border: 1px solid #d1d5db; background: #f9fafb; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .del-item { color: #ef4444; background: none; border: none; font-size: 16px; cursor: pointer; padding: 4px; }
 
         .bill-box { background: #f0fdf4; padding: 12px; border-radius: 10px; margin: 15px 0; font-size: 14px; }
@@ -78,6 +82,17 @@
     <div class="container">
         <h2 class="title">हमारे प्रोडक्ट्स</h2>
         <div class="product-grid">
+
+            <!-- नया प्रोडक्ट (Featured) -->
+            <div class="product-card">
+                <img src="https://i.ibb.co/3yLKdQqX/Screenshot-20260831-165324.jpg" alt="स्पेशल प्रोडक्ट">
+                <h3>प्रीमियम स्पेशल प्रोडक्ट</h3>
+                <p>हाई क्वालिटी और लेटेस्ट डिज़ाइन।</p>
+                <div class="price-row">
+                    <span class="price">₹999</span>
+                    <button class="buy-btn" onclick="addToCart('प्रीमियम स्पेशल प्रोडक्ट', 999)">+ कार्ट में जोड़ें</button>
+                </div>
+            </div>
 
             <div class="product-card">
                 <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=400&q=80" alt="टी-शर्ट">
@@ -122,6 +137,7 @@
         </div>
     </div>
 
+    <!-- कार्ट व चेकआउट मोडल -->
     <div id="shopModal">
         <div class="modal-box">
             
@@ -186,18 +202,33 @@
         var custDetails = {};
 
         function addToCart(title, price) {
-            cart.push({ title: title, price: price });
+            var existingIndex = cart.findIndex(item => item.title === title);
+            if (existingIndex > -1) {
+                cart[existingIndex].qty += 1;
+            } else {
+                cart.push({ title: title, price: price, qty: 1 });
+            }
             renderCart();
             openModal('cart');
         }
 
-        function removeItem(idx) {
-            cart.splice(idx, 1);
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            renderCart();
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
             renderCart();
         }
 
         function renderCart() {
-            document.getElementById('cartCount').innerText = cart.length;
+            var totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cartCount').innerText = totalCount;
+            
             var list = document.getElementById('cartList');
             var total = 0;
 
@@ -209,9 +240,15 @@
 
             var html = '';
             for (var i = 0; i < cart.length; i++) {
-                total += cart[i].price;
+                var itemTotal = cart[i].price * cart[i].qty;
+                total += itemTotal;
                 html += '<div class="cart-item">' +
-                    '<div><b>' + cart[i].title + '</b><br><span style="color:#059669;">₹' + cart[i].price + '</span></div>' +
+                    '<div class="cart-item-info"><b>' + cart[i].title + '</b><br><span style="color:#059669;">₹' + cart[i].price + '</span></div>' +
+                    '<div class="qty-controls">' +
+                        '<button class="qty-btn" onclick="changeQty(' + i + ', -1)">-</button>' +
+                        '<span>' + cart[i].qty + '</span>' +
+                        '<button class="qty-btn" onclick="changeQty(' + i + ', 1)">+</button>' +
+                    '</div>' +
                     '<button class="del-item" onclick="removeItem(' + i + ')"><i class="fa-solid fa-trash"></i></button>' +
                     '</div>';
             }
@@ -252,7 +289,7 @@
             custDetails = { name: name, phone: phone, pin: pin, addr: addr, city: city };
 
             var total = 0;
-            for (var i = 0; i < cart.length; i++) total += cart[i].price;
+            for (var i = 0; i < cart.length; i++) total += (cart[i].price * cart[i].qty);
             document.getElementById('payTotal').innerText = '₹' + total;
 
             var upiLink = "upi://pay?pa=" + UPI_ID + "&pn=" + encodeURIComponent("Ashu Diwakar") + "&am=" + total + "&cu=INR&tn=Order%20Payment";
@@ -268,11 +305,11 @@
             var total = 0;
             var itemsListText = '';
             for (var i = 0; i < cart.length; i++) {
-                total += cart[i].price;
-                itemsListText += (i+1) + '. ' + cart[i].title + ' (₹' + cart[i].price + ')%0A';
+                var itemTotal = cart[i].price * cart[i].qty;
+                total += itemTotal;
+                itemsListText += (i+1) + '. ' + cart[i].title + ' [मात्रा: ' + cart[i].qty + '] (₹' + itemTotal + ')%0A';
             }
 
-            // ऑटोमैटिक WhatsApp मैसेज
             var waMessage = "🛍️ *नया ऑनलाइन ऑर्डर!*%0A%0A" +
                 "*ऑर्डर ID:* %23AD-" + randId + "%0A" +
                 "------------------------%0A" +
@@ -285,10 +322,8 @@
                 "📍 पता: " + custDetails.addr + ", " + custDetails.city + " (" + custDetails.pin + ")%0A%0A" +
                 "✅ *मैंने UPI से पेमेंट कर दिया है, कृपया मेरा ऑर्डर कन्फर्म करें।*";
 
-            // सीधा WhatsApp चैट पर रीडायरेक्ट
             var waLink = "https://wa.me/" + SELLER_WHATSAPP + "?text=" + waMessage;
             
-            // कार्ट रीसेट और रीडायरेक्ट
             cart = [];
             renderCart();
             closeModal();

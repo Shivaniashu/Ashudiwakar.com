@@ -3,357 +3,294 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashu Diwakar - प्रीमियम ऑनलाइन स्टोर</title>
+    <title>Ashu Diwakar - ऑनलाइन स्टोर</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #10b981;
-            --primary-dark: #059669;
-            --primary-light: #d1fae5;
-            --bg-light: #f0fdf4;
-            --surface: #ffffff;
-            --text-main: #1f2937;
-            --text-muted: #6b7280;
-            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            --shadow-lg: 0 15px 25px -5px rgba(16, 185, 129, 0.15);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: #f0fdf4; color: #1f2937; line-height: 1.5; padding-bottom: 50px; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--bg-light); color: var(--text-main); line-height: 1.6; padding-bottom: 30px; }
-
-        /* Navbar */
-        nav { background: #ffffff; display: flex; justify-content: space-between; align-items: center; padding: 14px 6%; position: sticky; top: 0; z-index: 999; box-shadow: var(--shadow-sm); }
-        .logo { font-size: 20px; font-weight: 700; color: var(--primary-dark); display: flex; align-items: center; gap: 8px; text-decoration: none; }
-        .cart-icon-btn { background: var(--primary); color: #ffffff; border: none; padding: 8px 16px; border-radius: 50px; cursor: pointer; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 6px; box-shadow: 0 3px 8px rgba(16,185,129,0.3); }
+        /* Header */
+        header { background: #ffffff; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 10; }
+        .logo { font-size: 20px; font-weight: bold; color: #059669; text-decoration: none; }
+        .cart-btn { background: #10b981; color: #ffffff; border: none; padding: 8px 16px; border-radius: 20px; font-weight: bold; font-size: 14px; cursor: pointer; }
 
         /* Hero */
-        .hero { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 35px 20px; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-radius: 0 0 30px 30px; }
-        .hero-badge { background: #ffffff; color: var(--primary-dark); padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 12px; box-shadow: var(--shadow-sm); }
-        .hero h1 { font-size: 28px; line-height: 1.2; color: #064e3b; margin-bottom: 10px; }
-        .hero p { color: var(--text-muted); font-size: 14px; margin-bottom: 18px; max-width: 500px; }
-        .cta-btn { background: var(--primary); color: white; padding: 10px 22px; border-radius: 25px; text-decoration: none; font-weight: 600; font-size: 14px; }
+        .hero { background: linear-gradient(135deg, #ecfdf5, #d1fae5); text-align: center; padding: 30px 15px; border-radius: 0 0 25px 25px; margin-bottom: 25px; }
+        .hero h1 { font-size: 24px; color: #064e3b; margin-bottom: 8px; }
+        .hero p { font-size: 14px; color: #4b5563; }
 
-        /* Products Grid */
-        .container { max-width: 1200px; margin: 30px auto; padding: 0 16px; }
-        .section-header { text-align: center; margin-bottom: 25px; }
-        .section-header h2 { font-size: 24px; color: #064e3b; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-        .card { background: var(--surface); border-radius: 16px; padding: 16px; box-shadow: var(--shadow-sm); border: 1px solid rgba(16, 185, 129, 0.12); display: flex; flex-direction: column; justify-content: space-between; }
-        .card-img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; margin-bottom: 10px; }
-        .card-tag { font-size: 11px; font-weight: 600; color: var(--primary); text-transform: uppercase; }
-        .card-title { font-size: 16px; font-weight: 600; margin: 4px 0 6px; color: var(--text-main); }
-        .card-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 10px; border-top: 1px solid #f0fdf4; }
-        .price { font-size: 18px; font-weight: 700; color: var(--primary-dark); }
-        .add-cart-btn { background: var(--bg-light); color: var(--primary-dark); border: 1px solid var(--primary); padding: 8px 14px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 13px; }
+        /* Products */
+        .container { max-width: 900px; margin: 0 auto; padding: 0 15px; }
+        .title { text-align: center; margin-bottom: 20px; color: #064e3b; font-size: 22px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
+        .product-card { background: #ffffff; border-radius: 14px; padding: 14px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #d1fae5; }
+        .product-card img { width: 100%; height: 160px; object-fit: cover; border-radius: 10px; margin-bottom: 10px; }
+        .product-card h3 { font-size: 16px; margin-bottom: 5px; }
+        .product-card p { font-size: 12px; color: #6b7280; margin-bottom: 10px; }
+        .price-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f3f4f6; padding-top: 10px; }
+        .price { font-size: 17px; font-weight: bold; color: #059669; }
+        .buy-btn { background: #10b981; color: white; border: none; padding: 7px 14px; border-radius: 15px; font-weight: bold; font-size: 13px; cursor: pointer; }
 
-        /* Popup Cart / Checkout Modal */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: flex-end; z-index: 10000; }
-        .cart-drawer { width: 100%; max-width: 420px; height: 100%; background: #ffffff; padding: 20px; display: flex; flex-direction: column; overflow-y: auto; box-sizing: border-box; }
+        /* Full Popup Modal */
+        #shopModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: flex-end; }
+        .modal-box { background: #ffffff; width: 100%; max-width: 480px; max-height: 90vh; border-radius: 20px 20px 0 0; padding: 20px; overflow-y: auto; box-sizing: border-box; }
+        
+        .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e5e7eb; padding-bottom: 10px; margin-bottom: 15px; }
+        .modal-header h3 { font-size: 18px; color: #111827; }
+        .close-icon { font-size: 24px; font-weight: bold; border: none; background: none; cursor: pointer; color: #6b7280; }
 
-        .drawer-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1px solid #e5e7eb; margin-bottom: 15px; }
-        .drawer-header h3 { font-size: 18px; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
-        .close-btn { background: none; border: none; font-size: 26px; cursor: pointer; color: #6b7280; line-height: 1; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f3f4f6; font-size: 14px; }
+        .del-item { color: #ef4444; background: none; border: none; font-size: 16px; cursor: pointer; padding: 4px; }
 
-        .cart-items-list { flex: 1; overflow-y: auto; margin-bottom: 15px; min-height: 120px; }
-        .cart-item-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f3f4f6; }
-        .cart-item-info h4 { font-size: 14px; color: var(--text-main); }
-        .cart-item-info p { font-size: 13px; color: var(--primary-dark); font-weight: 600; }
-        .del-btn { color: #ef4444; background: none; border: none; cursor: pointer; font-size: 15px; padding: 5px 8px; }
+        .bill-box { background: #f0fdf4; padding: 12px; border-radius: 10px; margin: 15px 0; font-size: 14px; }
+        .bill-box div { display: flex; justify-content: space-between; margin-bottom: 4px; }
+        .bill-box .total-row { font-weight: bold; font-size: 16px; color: #064e3b; border-top: 1px solid #a7f3d0; padding-top: 6px; }
 
-        .bill-details { background: var(--bg-light); border-radius: 10px; padding: 12px; margin-bottom: 15px; }
-        .bill-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px; }
-        .bill-row.total { font-size: 15px; font-weight: 700; color: #064e3b; border-top: 1px solid #d1fae5; padding-top: 5px; margin-top: 5px; }
+        .action-btn { width: 100%; background: #10b981; color: white; border: none; padding: 12px; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .back-btn { width: 100%; background: #f3f4f6; color: #4b5563; border: none; padding: 10px; border-radius: 10px; font-size: 14px; cursor: pointer; margin-top: 8px; }
 
-        .checkout-step-btn { background: var(--primary); color: white; border: none; width: 100%; padding: 13px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; }
-
-        /* Forms */
-        .form-group { margin-bottom: 10px; text-align: left; }
-        .form-group label { display: block; font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 3px; }
-        .form-group input, .form-group textarea { width: 100%; padding: 9px 10px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; outline: none; }
+        /* Form styling */
+        .form-input { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; box-sizing: border-box; }
 
         /* UPI Payment */
-        .upi-box { text-align: center; padding: 15px; background: #f9fafb; border-radius: 12px; border: 1px dashed var(--primary); margin-bottom: 15px; }
-        .upi-qr { width: 150px; height: 150px; margin: 10px auto; border-radius: 8px; border: 1px solid #e5e7eb; padding: 4px; background: white; }
-        .upi-id-tag { background: var(--primary-light); color: var(--primary-dark); padding: 4px 10px; border-radius: 6px; font-size: 13px; font-weight: 600; display: inline-block; margin: 4px 0; }
-
-        /* Success */
-        .success-screen { text-align: center; padding: 25px 10px; }
-        .success-icon { font-size: 50px; color: var(--primary); margin-bottom: 12px; }
-
-        footer { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 40px; }
+        .upi-container { text-align: center; padding: 10px 0; }
+        .upi-tag { background: #d1fae5; color: #065f46; padding: 6px 12px; border-radius: 6px; font-weight: bold; font-size: 14px; display: inline-block; margin-bottom: 10px; }
+        .qr-img { width: 160px; height: 160px; margin: 8px auto; border: 1px solid #e5e7eb; padding: 5px; border-radius: 8px; display: block; }
+        .app-pay-btn { display: block; text-decoration: none; text-align: center; background: #0284c7; color: white; padding: 12px; border-radius: 10px; font-weight: bold; margin: 10px 0; font-size: 14px; }
     </style>
 </head>
 <body>
 
-    <nav>
+    <header>
         <a href="#" class="logo"><i class="fa-solid fa-store"></i> Ashu Diwakar</a>
-        <button class="cart-icon-btn" onclick="openCartModal()">
-            <i class="fa-solid fa-cart-shopping"></i> कार्ट (<span id="cart-count">0</span>)
+        <button class="cart-btn" onclick="openModal('cart')">
+            <i class="fa-solid fa-cart-shopping"></i> कार्ट (<span id="cartCount">0</span>)
         </button>
-    </nav>
+    </header>
 
-    <section class="hero">
-        <span class="hero-badge"><i class="fa-solid fa-bolt"></i> 100% सुरक्षित डिलीवरी & ऑनलाइन UPI पे</span>
-        <h1>प्रीमियम प्रोडक्ट्स, बेस्ट रेट</h1>
-        <p>अपनी पसंद का सामान चुनें और तुरंत आसान UPI पेमेंट से ऑर्डर करें।</p>
-        <a href="#products" class="cta-btn">शॉपिंग करें ↓</a>
-    </section>
+    <div class="hero">
+        <h1>Ashu Diwakar स्टोर पर आपका स्वागत है</h1>
+        <p>100% सुरक्षित UPI पेमेंट और फ़ास्ट डिलीवरी</p>
+    </div>
 
-    <main class="container" id="products">
-        <div class="section-header">
-            <h2>हमारे प्रोडक्ट्स</h2>
-            <p>कार्ट में जोड़ें और 'Buy Now' करें</p>
-        </div>
-
+    <div class="container">
+        <h2 class="title">हमारे प्रोडक्ट्स</h2>
         <div class="product-grid">
-            <div class="card">
-                <div>
-                    <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&q=80" alt="टी-शर्ट" class="card-img">
-                    <span class="card-tag">फैशन</span>
-                    <h3 class="card-title">प्रीमियम कॉटन टी-शर्ट</h3>
-                    <p style="font-size: 13px; color: #6b7280;">100% शुद्ध कॉटन, कम्फर्ट फिट।</p>
-                </div>
-                <div class="card-bottom">
-                    <div class="price">₹799</div>
-                    <button class="add-cart-btn" onclick="addToCart('प्रीमियम कॉटन टी-शर्ट', 799)">+ कार्ट में जोड़ें</button>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=400&q=80" alt="टी-शर्ट">
+                <h3>प्रीमियम कॉटन टी-शर्ट</h3>
+                <p>100% शुद्ध कॉटन और कम्फर्टेबल फिटिंग।</p>
+                <div class="price-row">
+                    <span class="price">₹799</span>
+                    <button class="buy-btn" onclick="addToCart('प्रीमियम कॉटन टी-शर्ट', 799)">+ कार्ट में जोड़ें</button>
                 </div>
             </div>
 
-            <div class="card">
-                <div>
-                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80" alt="हेडफोन" class="card-img">
-                    <span class="card-tag">इलेक्ट्रॉनिक्स</span>
-                    <h3 class="card-title">वायरलेस बास हेडफ़ोन</h3>
-                    <p style="font-size: 13px; color: #6b7280;">40 घंटे की बैटरी लाइफ और सुपर बास।</p>
-                </div>
-                <div class="card-bottom">
-                    <div class="price">₹2,499</div>
-                    <button class="add-cart-btn" onclick="addToCart('वायरलेस बास हेडफ़ोन', 2499)">+ कार्ट में जोड़ें</button>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80" alt="हेडफोन">
+                <h3>वायरलेस बास हेडफ़ोन</h3>
+                <p>40 घंटे बैटरी बैकअप और गहरा बास।</p>
+                <div class="price-row">
+                    <span class="price">₹2,499</span>
+                    <button class="buy-btn" onclick="addToCart('वायरलेस बास हेडफ़ोन', 2499)">+ कार्ट में जोड़ें</button>
                 </div>
             </div>
 
-            <div class="card">
-                <div>
-                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80" alt="स्मार्टवॉच" class="card-img">
-                    <span class="card-tag">एक्सेसरीज</span>
-                    <h3 class="card-title">स्मार्ट फिटनेस वॉच</h3>
-                    <p style="font-size: 13px; color: #6b7280;">AMOLED डिस्प्ले और फिटनेस ट्रैकर।</p>
-                </div>
-                <div class="card-bottom">
-                    <div class="price">₹1,899</div>
-                    <button class="add-cart-btn" onclick="addToCart('स्मार्ट फिटनेस वॉच', 1899)">+ कार्ट में जोड़ें</button>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80" alt="स्मार्टवॉच">
+                <h3>स्मार्ट फिटनेस वॉच</h3>
+                <p>AMOLED डिस्प्ले और फिटनेस ट्रैकिंग।</p>
+                <div class="price-row">
+                    <span class="price">₹1,899</span>
+                    <button class="buy-btn" onclick="addToCart('स्मार्ट फिटनेस वॉच', 1899)">+ कार्ट में जोड़ें</button>
                 </div>
             </div>
 
-            <div class="card">
-                <div>
-                    <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&q=80" alt="स्मार्ट रिंग" class="card-img">
-                    <span class="card-tag">गैजेट्स</span>
-                    <h3 class="card-title">स्मार्ट हेल्थ रिंग</h3>
-                    <p style="font-size: 13px; color: #6b7280;">स्लीप ट्रैकिंग और वाटरप्रूफ बॉडी।</p>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400&q=80" alt="स्मार्ट रिंग">
+                <h3>स्मार्ट हेल्थ रिंग</h3>
+                <p>स्लीप ट्रैकर और वाटरप्रूफ बॉडी।</p>
+                <div class="price-row">
+                    <span class="price">₹3,299</span>
+                    <button class="buy-btn" onclick="addToCart('स्मार्ट हेल्थ रिंग', 3299)">+ कार्ट में जोड़ें</button>
                 </div>
-                <div class="card-bottom">
-                    <div class="price">₹3,299</div>
-                    <button class="add-cart-btn" onclick="addToCart('स्मार्ट हेल्थ रिंग', 3299)">+ कार्ट में जोड़ें</button>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <div class="modal-overlay" id="checkoutModal">
-        <div class="cart-drawer">
-            
-            <div id="step-cart">
-                <div class="drawer-header">
-                    <h3><i class="fa-solid fa-cart-shopping"></i> शॉपिंग कार्ट</h3>
-                    <button class="close-btn" onclick="closeCartModal()">&times;</button>
-                </div>
-                
-                <div class="cart-items-list" id="cartItemsContainer"></div>
-
-                <div class="bill-details">
-                    <div class="bill-row"><span>कुल आइटम्स</span><span id="bill-qty">0</span></div>
-                    <div class="bill-row"><span>डिलीवरी चार्ज</span><span style="color:var(--primary); font-weight:600;">FREE</span></div>
-                    <div class="bill-row total"><span>कुल राशि (Total)</span><span id="bill-total">₹0</span></div>
-                </div>
-
-                <button class="checkout-step-btn" onclick="goToAddress()">
-                    आगे बढ़ें (Buy Now) <i class="fa-solid fa-arrow-right"></i>
-                </button>
-            </div>
-
-            <div id="step-address" style="display: none;">
-                <div class="drawer-header">
-                    <h3><i class="fa-solid fa-location-dot"></i> डिलीवरी का पता</h3>
-                    <button class="close-btn" onclick="closeCartModal()">&times;</button>
-                </div>
-
-                <form onsubmit="goToPayment(event)">
-                    <div class="form-group">
-                        <label>पूरा नाम *</label>
-                        <input type="text" id="custName" placeholder="अपना नाम लिखें" required>
-                    </div>
-                    <div class="form-group">
-                        <label>मोबाइल नंबर *</label>
-                        <input type="tel" id="custPhone" placeholder="10 अंकों का मोबाइल नंबर" pattern="[0-9]{10}" required>
-                    </div>
-                    <div class="form-group">
-                        <label>पिन कोड *</label>
-                        <input type="text" id="custPin" placeholder="पिन कोड" required>
-                    </div>
-                    <div class="form-group">
-                        <label>पूरा पता (मकान / गली / क्षेत्र) *</label>
-                        <textarea id="custAddress" rows="2" placeholder="पूरा पता लिखें..." required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>शहर व राज्य *</label>
-                        <input type="text" id="custCity" placeholder="उदा. आगरा, उत्तर प्रदेश" required>
-                    </div>
-
-                    <button type="submit" class="checkout-step-btn" style="margin-top: 12px;">
-                        पेमेंट के लिए आगे बढ़ें <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                    <button type="button" onclick="goToCart()" style="background:none; border:none; color:var(--text-muted); width:100%; margin-top:10px; cursor:pointer; font-size:13px;">
-                        ← कार्ट पर वापस जाएं
-                    </button>
-                </form>
-            </div>
-
-            <div id="step-payment" style="display: none;">
-                <div class="drawer-header">
-                    <h3><i class="fa-solid fa-shield-halved"></i> UPI ऑनलाइन पेमेंट</h3>
-                    <button class="close-btn" onclick="closeCartModal()">&times;</button>
-                </div>
-
-                <div class="upi-box">
-                    <p style="font-size:12px; color:var(--text-muted);">आधिकारिक UPI ID:</p>
-                    <div class="upi-id-tag"><i class="fa-solid fa-qrcode"></i> ashudiwakar@fam</div>
-                    <p style="font-size:14px; font-weight:700; margin-top:4px;">कुल राशि: <span id="payAmountText" style="color:var(--primary-dark);">₹0</span></p>
-                    
-                    <img id="upiQrImg" src="" alt="QR Code" class="upi-qr">
-                    <p style="font-size:11px; color:#6b7280;">PhonePe / GPay / Paytm से QR स्कैन करें</p>
-                </div>
-
-                <a id="upiDeepLink" href="#" class="checkout-step-btn" style="text-decoration:none; background:#0284c7; margin-bottom:10px;">
-                    <i class="fa-solid fa-mobile-screen"></i> UPI App से सीधे पे करें
-                </a>
-
-                <button class="checkout-step-btn" onclick="completeOrder()">
-                    <i class="fa-solid fa-circle-check"></i> मैंने पेमेंट कर दिया (कन्फर्म करें)
-                </button>
-            </div>
-
-            <div id="step-success" style="display: none;" class="success-screen">
-                <i class="fa-solid fa-circle-check success-icon"></i>
-                <h2 style="color:#064e3b; margin-bottom:6px;">Order Done!</h2>
-                <h4 style="color:var(--primary-dark); font-size:15px; margin-bottom:12px;">ऑर्डर सफलतापूर्वक प्राप्त हुआ! 🎉</h4>
-                <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">
-                    ऑर्डर आईडी: <strong>#AD-<span id="orderIdDisplay"></span></strong>
-                </p>
-                <div style="background:var(--bg-light); padding:10px; border-radius:8px; text-align:left; font-size:12px; margin-bottom:18px;">
-                    <strong>डिलीवरी पता:</strong>
-                    <div id="summaryCustomerDetails" style="margin-top:4px; color:#4b5563;"></div>
-                </div>
-                <button class="checkout-step-btn" onclick="finishShopping()">
-                    शॉपिंग जारी रखें
-                </button>
             </div>
 
         </div>
     </div>
 
-    <footer>
-        <p>© 2026 Ashu Diwakar. All Rights Reserved.</p>
-    </footer>
+    <div id="shopModal">
+        <div class="modal-box">
+            
+            <div id="view-cart">
+                <div class="modal-header">
+                    <h3>🛒 आपका कार्ट</h3>
+                    <button class="close-icon" onclick="closeModal()">&times;</button>
+                </div>
+                <div id="cartList"></div>
+                <div class="bill-box">
+                    <div><span>डिलीवरी चार्ज:</span><span style="color:#059669; font-weight:bold;">मुफ़्त (FREE)</span></div>
+                    <div class="total-row"><span>कुल राशि (Total):</span><span id="totalAmount">₹0</span></div>
+                </div>
+                <button class="action-btn" onclick="openModal('address')">आगे बढ़ें (Buy Now) ➔</button>
+            </div>
+
+            <div id="view-address" style="display:none;">
+                <div class="modal-header">
+                    <h3>📍 डिलीवरी का पता भरें</h3>
+                    <button class="close-icon" onclick="closeModal()">&times;</button>
+                </div>
+                <input type="text" id="custName" class="form-input" placeholder="आपका पूरा नाम *" required>
+                <input type="tel" id="custPhone" class="form-input" placeholder="10 अंकों का मोबाइल नंबर *" maxlength="10" required>
+                <input type="text" id="custPin" class="form-input" placeholder="पिन कोड *" maxlength="6" required>
+                <textarea id="custAddr" class="form-input" rows="2" placeholder="पूरा पता (मकान नं, गली, क्षेत्र) *" required></textarea>
+                <input type="text" id="custCity" class="form-input" placeholder="शहर व राज्य *" required>
+                
+                <button class="action-btn" onclick="proceedToPayment()">पेमेंट के लिए आगे बढ़ें ➔</button>
+                <button class="back-btn" onclick="openModal('cart')">← कार्ट पर वापस</button>
+            </div>
+
+            <div id="view-payment" style="display:none;">
+                <div class="modal-header">
+                    <h3>💳 UPI ऑनलाइन पेमेंट</h3>
+                    <button class="close-icon" onclick="closeModal()">&times;</button>
+                </div>
+                <div class="upi-container">
+                    <p style="font-size:13px; color:#4b5563;">UPI ID:</p>
+                    <div class="upi-tag">ashudiwakar@fam</div>
+                    <p style="font-size:16px; font-weight:bold; margin-bottom:8px;">कुल बिल: <span id="payTotal" style="color:#059669;">₹0</span></p>
+                    
+                    <img id="upiQr" src="" class="qr-img" alt="UPI QR">
+                    <p style="font-size:12px; color:#6b7280;">PhonePe / GPay / Paytm से QR स्कैन करें</p>
+                </div>
+
+                <a id="payAppLink" href="#" class="app-pay-btn"><i class="fa-solid fa-mobile-screen"></i> UPI App से सीधे पे करें</a>
+                <button class="action-btn" onclick="confirmOrder()">✅ मैंने पेमेंट कर दिया (कन्फर्म करें)</button>
+                <button class="back-btn" onclick="openModal('address')">← एड्रेस बदलें</button>
+            </div>
+
+            <div id="view-success" style="display:none; text-align:center; padding:10px 0;">
+                <i class="fa-solid fa-circle-check" style="font-size:55px; color:#10b981; margin-bottom:10px;"></i>
+                <h2 style="color:#064e3b; margin-bottom:5px;">Order Done!</h2>
+                <h3 style="color:#059669; font-size:16px; margin-bottom:15px;">ऑर्डर सफलतापूर्वक प्राप्त हुआ! 🎉</h3>
+                <p style="font-size:14px; color:#4b5563; margin-bottom:12px;">
+                    ऑर्डर ID: <strong>#AD-<span id="orderIdText"></span></strong>
+                </p>
+                <div id="summaryBox" style="background:#f0fdf4; padding:12px; border-radius:8px; text-align:left; font-size:13px; margin-bottom:15px;"></div>
+                <button class="action-btn" onclick="closeModal(); resetStore();">होमपेज पर वापस जाएं</button>
+            </div>
+
+        </div>
+    </div>
 
     <script>
         var UPI_ID = "ashudiwakar@fam";
-        var PAYEE_NAME = "Ashu Diwakar";
-
         var cart = [];
-        var customerData = {};
+        var custDetails = {};
 
         function addToCart(title, price) {
             cart.push({ title: title, price: price });
-            updateCartUI();
-            openCartModal();
+            renderCart();
+            openModal('cart');
         }
 
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartUI();
+        function removeItem(idx) {
+            cart.splice(idx, 1);
+            renderCart();
         }
 
-        function updateCartUI() {
-            document.getElementById('cart-count').innerText = cart.length;
-            var container = document.getElementById('cartItemsContainer');
-            
+        function renderCart() {
+            document.getElementById('cartCount').innerText = cart.length;
+            var list = document.getElementById('cartList');
+            var total = 0;
+
             if (cart.length === 0) {
-                container.innerHTML = '<div style="text-align:center; padding:35px 0; color:#9ca3af;"><i class="fa-solid fa-basket-shopping" style="font-size:36px; margin-bottom:8px;"></i><p>आपका कार्ट खाली है</p></div>';
-                document.getElementById('bill-qty').innerText = "0";
-                document.getElementById('bill-total').innerText = "₹0";
+                list.innerHTML = '<p style="text-align:center; padding:20px; color:#9ca3af;">आपका कार्ट खाली है</p>';
+                document.getElementById('totalAmount').innerText = '₹0';
                 return;
             }
 
-            var total = 0;
             var html = '';
             for (var i = 0; i < cart.length; i++) {
                 total += cart[i].price;
-                html += '<div class="cart-item-row">' +
-                        '<div class="cart-item-info">' +
-                            '<h4>' + cart[i].title + '</h4>' +
-                            '<p>₹' + cart[i].price + '</p>' +
-                        '</div>' +
-                        '<button class="del-btn" onclick="removeFromCart(' + i + ')">' +
-                            '<i class="fa-solid fa-trash"></i>' +
-                        '</button>' +
+                html += '<div class="cart-item">' +
+                    '<div><b>' + cart[i].title + '</b><br><span style="color:#059669;">₹' + cart[i].price + '</span></div>' +
+                    '<button class="del-item" onclick="removeItem(' + i + ')"><i class="fa-solid fa-trash"></i></button>' +
                     '</div>';
             }
-            container.innerHTML = html;
-            document.getElementById('bill-qty').innerText = cart.length;
-            document.getElementById('bill-total').innerText = '₹' + total;
+            list.innerHTML = html;
+            document.getElementById('totalAmount').innerText = '₹' + total;
         }
 
-        function openCartModal() {
-            document.getElementById('checkoutModal').style.display = 'flex';
-            goToCart();
+        function openModal(step) {
+            document.getElementById('shopModal').style.display = 'flex';
+            document.getElementById('view-cart').style.display = 'none';
+            document.getElementById('view-address').style.display = 'none';
+            document.getElementById('view-payment').style.display = 'none';
+            document.getElementById('view-success').style.display = 'none';
+
+            if (step === 'cart') document.getElementById('view-cart').style.display = 'block';
+            if (step === 'address') {
+                if (cart.length === 0) { alert('पहले कार्ट में सामान जोड़ें!'); return; }
+                document.getElementById('view-address').style.display = 'block';
+            }
+            if (step === 'payment') document.getElementById('view-payment').style.display = 'block';
+            if (step === 'success') document.getElementById('view-success').style.display = 'block';
         }
 
-        function closeCartModal() {
-            document.getElementById('checkoutModal').style.display = 'none';
+        function closeModal() {
+            document.getElementById('shopModal').style.display = 'none';
         }
 
-        function goToCart() {
-            document.getElementById('step-cart').style.display = 'block';
-            document.getElementById('step-address').style.display = 'none';
-            document.getElementById('step-payment').style.display = 'none';
-            document.getElementById('step-success').style.display = 'none';
-        }
+        function proceedToPayment() {
+            var name = document.getElementById('custName').value.trim();
+            var phone = document.getElementById('custPhone').value.trim();
+            var pin = document.getElementById('custPin').value.trim();
+            var addr = document.getElementById('custAddr').value.trim();
+            var city = document.getElementById('custCity').value.trim();
 
-        function goToAddress() {
-            if (cart.length === 0) {
-                alert("कृपया पहले कार्ट में कोई सामान जोड़ें!");
+            if (!name || !phone || !pin || !addr || !city) {
+                alert('कृपया डिलीवरी फॉर्म के सभी कॉलम भरें!');
                 return;
             }
-            document.getElementById('step-cart').style.display = 'none';
-            document.getElementById('step-address').style.display = 'block';
-        }
 
-        function goToPayment(e) {
-            e.preventDefault();
-            customerData = {
-                name: document.getElementById('custName').value,
-                phone: document.getElementById('custPhone').value,
-                pin: document.getElementById('custPin').value,
-                address: document.getElementById('custAddress').value,
-                city: document.getElementById('custCity').value
-            };
+            custDetails = { name: name, phone: phone, pin: pin, addr: addr, city: city };
 
             var total = 0;
-            for (var i = 0; i < cart.length; i++) {
-                total += cart[i].price;
-            }
-            document.getElementById('payAmountText').innerText = '₹' + total;
+            for (var i = 0; i < cart.length; i++) total += cart[i].price;
+            document.getElementById('payTotal').innerText = '₹' + total;
 
-            var upiString = "upi://pay?pa=" + UPI_ID + "&pn=" 
+            var upiLink = "upi://pay?pa=" + UPI_ID + "&pn=" + encodeURIComponent("Ashu Diwakar") + "&am=" + total + "&cu=INR&tn=Order%20Payment";
+            document.getElementById('payAppLink').href = upiLink;
+            document.getElementById('upiQr').src = "https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=" + encodeURIComponent(upiLink);
+
+            openModal('payment');
+        }
+
+        function confirmOrder() {
+            var randId = Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('orderIdText').innerText = randId;
+            document.getElementById('summaryBox').innerHTML = 
+                '<b>नाम:</b> ' + custDetails.name + '<br>' +
+                '<b>फ़ोन:</b> ' + custDetails.phone + '<br>' +
+                '<b>पता:</b> ' + custDetails.addr + ', ' + custDetails.city + ' (' + custDetails.pin + ')';
+            
+            openModal('success');
+        }
+
+        function resetStore() {
+            cart = [];
+            renderCart();
+            document.getElementById('custName').value = '';
+            document.getElementById('custPhone').value = '';
+            document.getElementById('custPin').value = '';
+            document.getElementById('custAddr').value = '';
+            document.getElementById('custCity').value = '';
+        }
+
+        renderCart();
+    </script>
+</body>
+                    </html>
+                    

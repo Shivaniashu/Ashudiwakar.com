@@ -3,33 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashu Diwakar - ऑनलाइन स्टोर</title>
+    <title>Ashu Diwakar Store</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background-color: #f0fdf4; color: #1f2937; line-height: 1.5; padding-bottom: 50px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: #f4f7f6; color: #333; padding-bottom: 50px; }
 
         /* Header */
-        header { background: #ffffff; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 10; }
-        .logo { font-size: 20px; font-weight: bold; color: #059669; text-decoration: none; }
-        .cart-btn { background: #10b981; color: #ffffff; border: none; padding: 8px 16px; border-radius: 20px; font-weight: bold; font-size: 14px; cursor: pointer; }
+        header { background: #ffffff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 20px; font-weight: bold; color: #059669; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .cart-btn { background: #10b981; color: #ffffff; border: none; padding: 8px 18px; border-radius: 20px; font-weight: bold; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 6px; }
 
         /* Hero */
-        .hero { background: linear-gradient(135deg, #ecfdf5, #d1fae5); text-align: center; padding: 30px 15px; border-radius: 0 0 25px 25px; margin-bottom: 25px; }
+        .hero { background: linear-gradient(135deg, #ecfdf5, #d1fae5); text-align: center; padding: 35px 15px; border-radius: 0 0 25px 25px; margin-bottom: 25px; }
         .hero h1 { font-size: 24px; color: #064e3b; margin-bottom: 8px; }
         .hero p { font-size: 14px; color: #4b5563; }
 
-        /* Products */
+        /* Products Grid */
         .container { max-width: 900px; margin: 0 auto; padding: 0 15px; }
-        .title { text-align: center; margin-bottom: 20px; color: #064e3b; font-size: 22px; }
+        .title { text-align: center; margin-bottom: 20px; color: #064e3b; font-size: 22px; font-weight: bold; }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
-        .product-card { background: #ffffff; border-radius: 14px; padding: 14px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #d1fae5; }
+        .product-card { background: #ffffff; border-radius: 14px; padding: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #e5e7eb; transition: transform 0.2s; }
+        .product-card:hover { transform: translateY(-3px); }
         .product-card img { width: 100%; height: 160px; object-fit: cover; border-radius: 10px; margin-bottom: 10px; }
-        .product-card h3 { font-size: 16px; margin-bottom: 5px; }
+        .product-card h3 { font-size: 16px; margin-bottom: 5px; color: #1f2937; }
         .product-card p { font-size: 12px; color: #6b7280; margin-bottom: 10px; }
         .price-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f3f4f6; padding-top: 10px; }
-        .price { font-size: 17px; font-weight: bold; color: #059669; }
-        .buy-btn { background: #10b981; color: white; border: none; padding: 7px 14px; border-radius: 15px; font-weight: bold; font-size: 13px; cursor: pointer; }
+        .price { font-size: 18px; font-weight: bold; color: #059669; }
+        .buy-btn { background: #10b981; color: white; border: none; padding: 8px 14px; border-radius: 15px; font-weight: bold; font-size: 13px; cursor: pointer; }
 
         /* Full Popup Modal */
         #shopModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: flex-end; }
@@ -46,23 +47,24 @@
         .bill-box div { display: flex; justify-content: space-between; margin-bottom: 4px; }
         .bill-box .total-row { font-weight: bold; font-size: 16px; color: #064e3b; border-top: 1px solid #a7f3d0; padding-top: 6px; }
 
-        .action-btn { width: 100%; background: #10b981; color: white; border: none; padding: 12px; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .action-btn { width: 100%; background: #10b981; color: white; border: none; padding: 13px; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .wa-action-btn { width: 100%; background: #25D366; color: white; border: none; padding: 14px; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .back-btn { width: 100%; background: #f3f4f6; color: #4b5563; border: none; padding: 10px; border-radius: 10px; font-size: 14px; cursor: pointer; margin-top: 8px; }
 
         /* Form styling */
-        .form-input { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; box-sizing: border-box; }
+        .form-input { width: 100%; padding: 11px; margin-bottom: 10px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; box-sizing: border-box; }
 
         /* UPI Payment */
-        .upi-container { text-align: center; padding: 10px 0; }
-        .upi-tag { background: #d1fae5; color: #065f46; padding: 6px 12px; border-radius: 6px; font-weight: bold; font-size: 14px; display: inline-block; margin-bottom: 10px; }
-        .qr-img { width: 160px; height: 160px; margin: 8px auto; border: 1px solid #e5e7eb; padding: 5px; border-radius: 8px; display: block; }
-        .app-pay-btn { display: block; text-decoration: none; text-align: center; background: #0284c7; color: white; padding: 12px; border-radius: 10px; font-weight: bold; margin: 10px 0; font-size: 14px; }
+        .upi-container { text-align: center; padding: 5px 0; }
+        .upi-tag { background: #d1fae5; color: #065f46; padding: 6px 12px; border-radius: 6px; font-weight: bold; font-size: 14px; display: inline-block; margin-bottom: 8px; }
+        .qr-img { width: 160px; height: 160px; margin: 6px auto; border: 1px solid #e5e7eb; padding: 5px; border-radius: 8px; display: block; }
+        .app-pay-btn { display: block; text-decoration: none; text-align: center; background: #0284c7; color: white; padding: 11px; border-radius: 10px; font-weight: bold; margin: 8px 0; font-size: 14px; }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="#" class="logo"><i class="fa-solid fa-store"></i> Ashu Diwakar</a>
+        <a href="#" class="logo"><i class="fa-solid fa-bag-shopping"></i> Ashu Diwakar</a>
         <button class="cart-btn" onclick="openModal('cart')">
             <i class="fa-solid fa-cart-shopping"></i> कार्ट (<span id="cartCount">0</span>)
         </button>
@@ -70,7 +72,7 @@
 
     <div class="hero">
         <h1>Ashu Diwakar स्टोर पर आपका स्वागत है</h1>
-        <p>100% सुरक्षित UPI पेमेंट और फ़ास्ट डिलीवरी</p>
+        <p>100% सुरक्षित UPI पेमेंट और सीधे WhatsApp ऑर्डर</p>
     </div>
 
     <div class="container">
@@ -157,28 +159,20 @@
                     <button class="close-icon" onclick="closeModal()">&times;</button>
                 </div>
                 <div class="upi-container">
-                    <p style="font-size:13px; color:#4b5563;">UPI ID:</p>
+                    <p style="font-size:12px; color:#4b5563;">UPI ID:</p>
                     <div class="upi-tag">ashudiwakar@fam</div>
-                    <p style="font-size:16px; font-weight:bold; margin-bottom:8px;">कुल बिल: <span id="payTotal" style="color:#059669;">₹0</span></p>
+                    <p style="font-size:16px; font-weight:bold; margin-bottom:6px;">कुल राशि: <span id="payTotal" style="color:#059669;">₹0</span></p>
                     
                     <img id="upiQr" src="" class="qr-img" alt="UPI QR">
-                    <p style="font-size:12px; color:#6b7280;">PhonePe / GPay / Paytm से QR स्कैन करें</p>
+                    <p style="font-size:12px; color:#6b7280;">PhonePe / GPay / Paytm से स्कैन करें</p>
                 </div>
 
                 <a id="payAppLink" href="#" class="app-pay-btn"><i class="fa-solid fa-mobile-screen"></i> UPI App से सीधे पे करें</a>
-                <button class="action-btn" onclick="confirmOrder()">✅ मैंने पेमेंट कर दिया (कन्फर्म करें)</button>
-                <button class="back-btn" onclick="openModal('address')">← एड्रेस बदलें</button>
-            </div>
 
-            <div id="view-success" style="display:none; text-align:center; padding:10px 0;">
-                <i class="fa-solid fa-circle-check" style="font-size:55px; color:#10b981; margin-bottom:10px;"></i>
-                <h2 style="color:#064e3b; margin-bottom:5px;">Order Done!</h2>
-                <h3 style="color:#059669; font-size:16px; margin-bottom:15px;">ऑर्डर सफलतापूर्वक प्राप्त हुआ! 🎉</h3>
-                <p style="font-size:14px; color:#4b5563; margin-bottom:12px;">
-                    ऑर्डर ID: <strong>#AD-<span id="orderIdText"></span></strong>
-                </p>
-                <div id="summaryBox" style="background:#f0fdf4; padding:12px; border-radius:8px; text-align:left; font-size:13px; margin-bottom:15px;"></div>
-                <button class="action-btn" onclick="closeModal(); resetStore();">होमपेज पर वापस जाएं</button>
+                <button class="wa-action-btn" onclick="finishAndSendWhatsApp()">
+                    <i class="fa-brands fa-whatsapp" style="font-size:20px;"></i> ✅ पेमेंट हो गया (WhatsApp पर ऑर्डर भेजें)
+                </button>
+                <button class="back-btn" onclick="openModal('address')">← एड्रेस बदलें</button>
             </div>
 
         </div>
@@ -186,6 +180,8 @@
 
     <script>
         var UPI_ID = "ashudiwakar@fam";
+        var SELLER_WHATSAPP = "918810425625"; 
+
         var cart = [];
         var custDetails = {};
 
@@ -228,7 +224,6 @@
             document.getElementById('view-cart').style.display = 'none';
             document.getElementById('view-address').style.display = 'none';
             document.getElementById('view-payment').style.display = 'none';
-            document.getElementById('view-success').style.display = 'none';
 
             if (step === 'cart') document.getElementById('view-cart').style.display = 'block';
             if (step === 'address') {
@@ -236,7 +231,6 @@
                 document.getElementById('view-address').style.display = 'block';
             }
             if (step === 'payment') document.getElementById('view-payment').style.display = 'block';
-            if (step === 'success') document.getElementById('view-success').style.display = 'block';
         }
 
         function closeModal() {
@@ -268,29 +262,40 @@
             openModal('payment');
         }
 
-        function confirmOrder() {
+        function finishAndSendWhatsApp() {
             var randId = Math.floor(100000 + Math.random() * 900000);
-            document.getElementById('orderIdText').innerText = randId;
-            document.getElementById('summaryBox').innerHTML = 
-                '<b>नाम:</b> ' + custDetails.name + '<br>' +
-                '<b>फ़ोन:</b> ' + custDetails.phone + '<br>' +
-                '<b>पता:</b> ' + custDetails.addr + ', ' + custDetails.city + ' (' + custDetails.pin + ')';
-            
-            openModal('success');
-        }
 
-        function resetStore() {
+            var total = 0;
+            var itemsListText = '';
+            for (var i = 0; i < cart.length; i++) {
+                total += cart[i].price;
+                itemsListText += (i+1) + '. ' + cart[i].title + ' (₹' + cart[i].price + ')%0A';
+            }
+
+            // ऑटोमैटिक WhatsApp मैसेज
+            var waMessage = "🛍️ *नया ऑनलाइन ऑर्डर!*%0A%0A" +
+                "*ऑर्डर ID:* %23AD-" + randId + "%0A" +
+                "------------------------%0A" +
+                "*ऑर्डर आइटम्स:*%0A" + itemsListText + "%0A" +
+                "*कुल पेमेंट:* ₹" + total + " (Paid via UPI)%0A" +
+                "------------------------%0A" +
+                "*डिलीवरी एड्रेस डिटेल्स:*%0A" +
+                "👤 नाम: " + custDetails.name + "%0A" +
+                "📞 मोबाइल: " + custDetails.phone + "%0A" +
+                "📍 पता: " + custDetails.addr + ", " + custDetails.city + " (" + custDetails.pin + ")%0A%0A" +
+                "✅ *मैंने UPI से पेमेंट कर दिया है, कृपया मेरा ऑर्डर कन्फर्म करें।*";
+
+            // सीधा WhatsApp चैट पर रीडायरेक्ट
+            var waLink = "https://wa.me/" + SELLER_WHATSAPP + "?text=" + waMessage;
+            
+            // कार्ट रीसेट और रीडायरेक्ट
             cart = [];
             renderCart();
-            document.getElementById('custName').value = '';
-            document.getElementById('custPhone').value = '';
-            document.getElementById('custPin').value = '';
-            document.getElementById('custAddr').value = '';
-            document.getElementById('custCity').value = '';
+            closeModal();
+            window.location.href = waLink;
         }
 
         renderCart();
     </script>
 </body>
-                    </html>
-                    
+</html>
